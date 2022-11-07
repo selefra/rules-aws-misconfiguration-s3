@@ -15,8 +15,9 @@ rules:
         - Attack Surface
         - Security
         - Misconfigure
+        - PCI
       author: Selefra
-      standard: Custom
+      standard: PCI
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010108

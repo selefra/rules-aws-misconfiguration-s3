@@ -19,8 +19,9 @@ rules:
         - Security
         - Misconfigure
         - CIS Benchmark
+        - PCI
       author: Selefra
-      standard: CIS v1.4.0
+      standard: CIS v1.4.0, PCI
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010101
