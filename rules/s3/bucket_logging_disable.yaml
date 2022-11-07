@@ -1,0 +1,29 @@
+rules:
+  - name: bucket_logging_disable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets
+      WHERE
+        logging_target_bucket IS NULL
+        AND logging_target_prefix IS NULL;
+    labels:
+      tags:
+        - Security
+        - Misconfigure
+      author: Selefra
+      standard: Custom
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010111
+      severity: Low
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/bucket_logging_disable.md
+      title: S3 bucket logging disable
+      description: Ensure S3 bucket logging is enabled.
+    output: 'S3 bucket logging disable, bucket name: {{.name}}, region: {{.region}}'

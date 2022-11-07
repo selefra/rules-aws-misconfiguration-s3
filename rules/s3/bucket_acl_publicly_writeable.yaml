@@ -1,0 +1,32 @@
+rules:
+  - name: bucket_acl_publicly_writeable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets a1,
+        aws_s3_bucket_grants a2
+      WHERE
+       a1.selefra_id = a2.aws_s3_buckets_selefra_id
+        AND a2.grantee :: jsonb ->> 'URI' = 'http://acs.amazonaws.com/groups/global/AllUsers'
+        AND a2.permission IN ('WRITE_ACP', 'FULL_CONTROL');
+    labels:
+      tags:
+        - Attack Surface
+        - Security
+        - Misconfigure
+      author: Selefra
+      standard: Custom
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010105
+      severity: Critical
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/bucket_acl_publicly_writeable.md
+      title: S3 bucket ACL public writable
+      description: Ensure that Bucket ACL are not allowed to be publicly writable.
+    output: 'S3 bucket ACL public writable, bucket name: {{.name}}, region: {{.region}}'

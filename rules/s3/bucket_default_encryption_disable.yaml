@@ -1,0 +1,36 @@
+rules:
+  - name: bucket_default_encryption_disable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets AS a1 FULL
+        OUTER JOIN (
+          SELECT
+            a2.aws_s3_buckets_selefra_id
+          FROM
+            aws_s3_bucket_encryption_rules AS a2
+        ) AS a3 ON a1.selefra_id = a3.aws_s3_buckets_selefra_id
+      WHERE
+        a1.selefra_id <> a3.aws_s3_buckets_selefra_id
+        OR a3.aws_s3_buckets_selefra_id IS NULL;
+    labels:
+      tags:
+        - Security
+        - Misconfigure
+        - CIS Benchmark
+      author: Selefra
+      standard: CIS v1.4.0
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010101
+      severity: Low
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/bucket_default_encryption_disable.md
+      title: S3 bucket default encryption disable
+      description: Ensure all S3 buckets employ encryption-at-rest.
+    output: 'S3 bucket default encryption disable, bucket name: {{.name}}, region: {{.region}}'

@@ -1,0 +1,39 @@
+rules:
+  - name: bucket_publicly_readable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets a1,
+        json_array_elements (a1.policy :: json -> 'Statement') a2
+      WHERE
+        (
+          a2 ->> 'Action' = 's3:GetObject'
+          OR a2 ->> 'Action' = 's3:Get*'
+          OR a2 ->> 'Action' = 's3:*'
+        )
+        AND a2 ->> 'Effect' = 'Allow'
+        AND (
+          a2 ->> 'Principal' = '*'
+          OR a2 -> 'Principal' ->> 'AWS' = '*'
+        );
+    labels:
+      tags:
+        - Attack Surface
+        - Security
+        - Misconfigure
+      author: Selefra
+      standard: Custom
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010104
+      severity: High
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/bucket_publicly_readable.md
+      title: S3 bucket public readable
+      description: Ensure that Bucket are not allowed to be publicly readable.
+    output: 'S3 bucket public readable, bucket name: {{.name}}, region: {{.region}}'

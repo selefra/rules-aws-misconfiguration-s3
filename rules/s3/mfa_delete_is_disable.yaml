@@ -1,0 +1,29 @@
+rules:
+  - name: mfa_delete_is_disable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets
+      WHERE
+        versioning_mfa_delete = '';
+    labels:
+      tags:
+        - Security
+        - Misconfigure
+        - CIS Benchmark
+      author: Selefra
+      standard: CIS v1.4.0
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010103
+      severity: Medium
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/mfa_delete_is_disable.md
+      title: MFA Delete is disable
+      description: Ensure MFA Delete is enable on S3 buckets.
+    output: 'MFA Delete is disable, bucket name: {{.name}}, region: {{.region}}'

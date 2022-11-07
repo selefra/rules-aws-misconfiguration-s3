@@ -1,0 +1,32 @@
+rules:
+  - name: bucket_object_traversal_by_acl
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets a1,
+        aws_s3_bucket_grants a2
+      WHERE
+       a1.selefra_id = a2.aws_s3_buckets_selefra_id
+        AND a2.grantee :: jsonb ->> 'URI' = 'http://acs.amazonaws.com/groups/global/AllUsers'
+        AND a2.permission IN ('READ', 'FULL_CONTROL');
+    labels:
+      tags:
+        - Attack Surface
+        - Security
+        - Misconfigure
+      author: Selefra
+      standard: Custom
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      id: SF010109
+      severity: Medium
+      provider: AWS
+      resource_type: S3
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      remediation: remediation/s3/bucket_object_traversal_by_acl.md
+      title: S3 bucket object traversal by acl
+      description: Ensure that the Bucket Object is not traversable.
+    output: 'S3 bucket object traversal by acl, bucket name: {{.name}}, region: {{.region}}'
