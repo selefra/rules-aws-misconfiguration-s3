@@ -14,9 +14,11 @@ rules:
         - Misconfigure
         - CIS Benchmark
         - PCI
+        - ISO27001
       standard:
         - CIS
         - PCI
+        - ISO27001
       author: Selefra
     metadata:
       id: SF010113

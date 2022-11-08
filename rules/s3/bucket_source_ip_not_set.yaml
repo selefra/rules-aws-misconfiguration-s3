@@ -30,8 +30,9 @@ rules:
         - Attack Surface
         - Security
         - Misconfigure
+        - ISO27001
       standard:
-        - Custom
+        - ISO27001
       author: Selefra
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:

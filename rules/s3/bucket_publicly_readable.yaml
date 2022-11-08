@@ -27,12 +27,14 @@ rules:
         - APRA
         - MAS
         - NIST4
+        - ISO27001
       standard:
         - PCI
         - GDPR
         - APRA
         - MAS
         - NIST4
+        - ISO27001
       author: Selefra
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
