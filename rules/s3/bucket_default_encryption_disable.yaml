@@ -20,8 +20,20 @@ rules:
         - Misconfigure
         - CIS Benchmark
         - PCI
+        - HIPAA
+        - GDPR
+        - APRA
+        - MAS
+        - NIST4
+      standard:
+        - CIS
+        - PCI
+        - HIPAA
+        - GDPR
+        - APRA
+        - MAS
+        - NIST4
       author: Selefra
-      standard: CIS v1.4.0, PCI
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010101

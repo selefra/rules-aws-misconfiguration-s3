@@ -10,8 +10,9 @@ rules:
     labels:
       tags:
         - Misconfigure
+      standard:
+        - Custom
       author: Selefra
-      standard: Custom
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010116

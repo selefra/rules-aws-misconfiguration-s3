@@ -14,8 +14,10 @@ rules:
         - Misconfigure
         - CIS Benchmark
         - PCI
+      standard:
+        - CIS
+        - PCI
       author: Selefra
-      standard: CIS v1.4.0, PCI
     metadata:
       id: SF010113
       severity: High

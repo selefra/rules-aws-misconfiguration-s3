@@ -10,8 +10,16 @@ rules:
     labels:
       tags:
         - Misconfigure
+        - PCI
+        - APRA
+        - MAS
+        - NIST4
+      standard:
+        - PCI
+        - APRA
+        - MAS
+        - NIST4
       author: Selefra
-      standard: Custom
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010115

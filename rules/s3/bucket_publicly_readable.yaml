@@ -23,8 +23,17 @@ rules:
         - Security
         - Misconfigure
         - PCI
+        - GDPR
+        - APRA
+        - MAS
+        - NIST4
+      standard:
+        - PCI
+        - GDPR
+        - APRA
+        - MAS
+        - NIST4
       author: Selefra
-      standard: PCI
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
       id: SF010104
