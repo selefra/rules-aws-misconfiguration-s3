@@ -19,9 +19,11 @@ rules:
         - Attack Surface
         - Security
         - Misconfigure
-        - ISO27001
+        - ISO 27001
+        - SOC 2
       standard:
-        - ISO27001
+        - ISO 27001
+        - SOC 2
       author: Selefra
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:

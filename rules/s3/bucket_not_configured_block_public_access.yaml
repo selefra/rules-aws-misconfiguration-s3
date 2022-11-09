@@ -14,11 +14,17 @@ rules:
         - Misconfigure
         - CIS Benchmark
         - PCI
-        - ISO27001
+        - HIPAA
+        - GDPR
+        - ISO 27001
+        - SOC 2
       standard:
         - CIS
         - PCI
-        - ISO27001
+        - HIPAA
+        - GDPR
+        - ISO 27001
+        - SOC 2
       author: Selefra
     metadata:
       id: SF010113

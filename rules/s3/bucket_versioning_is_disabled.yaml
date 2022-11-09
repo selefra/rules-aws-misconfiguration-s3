@@ -11,14 +11,22 @@ rules:
       tags:
         - Misconfigure
         - PCI
+        - HIPAA
+        - GDPR
         - APRA
         - MAS
         - NIST4
+        - ISO 27001
+        - SOC 2
       standard:
         - PCI
+        - HIPAA
+        - GDPR
         - APRA
         - MAS
         - NIST4
+        - ISO 27001
+        - SOC 2
       author: Selefra
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:

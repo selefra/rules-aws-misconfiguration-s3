@@ -40,14 +40,14 @@ rules:
         - APRA
         - MAS
         - NIST4
-        - ISO27001
+        - ISO 27001
       standard:
         - CIS Benchmark
         - PCI
         - APRA
         - MAS
         - NIST4
-        - ISO27001
+        - ISO 27001
       author: Selefra
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
