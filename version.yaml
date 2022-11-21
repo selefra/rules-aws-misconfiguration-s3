@@ -1,0 +1,6 @@
+selefra:
+  cli_version: 0.0.2
+  providers:
+    - name: aws
+      source: selefra/aws
+      version: 0.0.4
