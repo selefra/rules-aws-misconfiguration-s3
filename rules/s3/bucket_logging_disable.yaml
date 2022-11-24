@@ -1,0 +1,36 @@
+rules:
+  - name: bucket_logging_disable
+    query: |
+      SELECT
+        *
+      FROM
+        aws_s3_buckets
+      WHERE
+        logging_target_bucket IS NULL
+        AND logging_target_prefix IS NULL;
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure S3 bucket logging is enabled.
+      id: SF010111
+      provider: AWS
+      remediation: remediation/s3/bucket_logging_disable.md
+      severity: Low
+      tags:
+        - Security
+        - Misconfigure
+        - PCI
+        - HIPAA
+        - GDPR
+        - APRA
+        - MAS
+        - NIST4
+        - ISO 27001
+        - SOC 2
+      title: S3 bucket logging disable
+    output: "S3 bucket logging disable, bucket name: {{.name}}, region: {{.region}}"
