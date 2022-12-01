@@ -9,22 +9,20 @@ rules:
       WHERE
         aws_s3_buckets_selefra_id IS NULL;
     labels:
-      tags:
-        - Security
-        - Misconfigure
-      standard:
-        - Custom
-      author: Selefra
-      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
-    metadata:
-      id: SF010117
-      severity: Low
-      provider: AWS
-      resource_type: S3
       resource_account_id: '{{.account_id}}'
       resource_id: '{{.name}}'
       resource_region: '{{.region}}'
-      remediation: remediation/s3/bucket_is_not_configured_with_cors_rules.md
-      title: S3 Bucket is not configured with CORS rules
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
       description: Ensure to configure secure CORS rules for the Bucket.
-    output: 'S3 Bucket is not configured with CORS rules, bucket name: {{.name}}, region: {{.region}}'
+      id: SF010117
+      provider: AWS
+      remediation: remediation/s3/bucket_is_not_configured_with_cors_rules.md
+      severity: Low
+      tags:
+        - Security
+        - Misconfigure
+      title: S3 Bucket is not configured with CORS rules
+    output: "S3 Bucket is not configured with CORS rules, bucket name: {{.name}}, region: {{.region}}"
