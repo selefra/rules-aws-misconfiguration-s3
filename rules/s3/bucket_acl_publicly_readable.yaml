@@ -22,7 +22,7 @@ rules:
       id: SF010106
       provider: AWS
       remediation: remediation/s3/bucket_acl_publicly_readable.md
-      severity: Low
+      severity: Medium
       tags:
         - Attack Surface
         - Security
