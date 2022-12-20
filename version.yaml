@@ -1,5 +1,5 @@
 selefra:
-  cli_version: 0.0.2
+  cli_version: 0.0.5
   providers:
     - name: aws
       source: selefra/aws

@@ -19,7 +19,7 @@ rules:
       id: SF010116
       provider: AWS
       remediation: remediation/s3/the_target_bucket_for_server_access_logging_is_the_bucket_itself.md
-      severity: Information
+      severity: Low
       tags:
         - Misconfigure
       title: The target bucket for server access logging is the bucket itself

@@ -19,7 +19,7 @@ rules:
       id: SF010115
       provider: AWS
       remediation: remediation/s3/bucket_versioning_is_disabled.md
-      severity: Information
+      severity: Low
       tags:
         - Misconfigure
         - PCI
