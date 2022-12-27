@@ -33,5 +33,6 @@ rules:
         - NIST4
         - ISO 27001
         - SOC 2
+        - AWS Config
       title: S3 bucket ACL public readable
     output: "S3 bucket ACL public readable, bucket name: {{.name}}, region: {{.region}}"

@@ -53,5 +53,6 @@ rules:
         - MAS
         - NIST4
         - ISO 27001
+        - AWS Config
       title: S3 bucket allow HTTP access
     output: "S3 bucket allow HTTP access, bucket name: {{.name}}, region: {{.region}}"

@@ -32,5 +32,6 @@ rules:
         - NIST4
         - ISO 27001
         - SOC 2
+        - AWS Config
       title: S3 bucket logging disable
     output: "S3 bucket logging disable, bucket name: {{.name}}, region: {{.region}}"

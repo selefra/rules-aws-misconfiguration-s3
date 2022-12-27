@@ -3,4 +3,4 @@ selefra:
   providers:
     - name: aws
       source: selefra/aws
-      version: 0.0.4
+      version: 0.0.6
