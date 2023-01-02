@@ -1,0 +1,35 @@
+rules:
+  - name: s3_not_default_encryption_kms
+    query: |
+      with data as (
+      select
+      bucket_arn
+      from
+        aws_s3_bucket_encryption_rules,
+        jsonb_array_elements(apply_server_side_encryption_by_default -> 'Rules') as rules
+      where
+        rules -> 'ApplyServerSideEncryptionByDefault' ->> 'KMSMasterKeyID' is not null
+      )
+      select
+      b.*
+      from
+      aws_s3_buckets as b
+      left join data as d on b.arn = d.bucket_arn
+      where d.bucket_arn is null and b.arn is not null and b.versioning_status = 'Enabled';
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure that s3 default encryption kms.
+      id: SF010119
+      provider: AWS
+      remediation: remediation/s3/s3_not_default_encryption_kms.md
+      severity: Low
+      tags:
+        - Misconfiguration
+      title: s3 not default encryption kms
+    output: "s3 not default encryption kms, bucket name: {{.name}}, region: {{.region}}"

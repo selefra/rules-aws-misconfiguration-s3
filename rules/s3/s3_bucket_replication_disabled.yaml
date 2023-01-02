@@ -1,0 +1,31 @@
+rules:
+  - name: s3_bucket_replication_disabled
+    query: |
+      select
+      *
+      from
+      aws_s3_buckets, JSONB_ARRAY_ELEMENTS(
+          case jsonb_typeof(replication_rules)
+          when 'array' then replication_rules
+          else '[]' end
+      ) as r
+      where
+      r->>'Status' is distinct from 'Enabled';
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure that s3 bucket replication enabled.
+      id: SF010120
+      provider: AWS
+      remediation: remediation/s3/s3_bucket_replication_disabled.md
+      severity: Medium
+      tags:
+        -AWS Config
+        - Misconfiguration
+      title: s3 bucket replication disabled
+    output: "s3 bucket replication disabled, bucket name: {{.name}}, region: {{.region}}"

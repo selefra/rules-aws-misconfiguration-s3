@@ -1,0 +1,51 @@
+rules:
+  - name: s3_bucket_policy_not_more_permissive
+    query: |
+      WITH w1 AS (
+        SELECT
+          *,
+          jsonb_array_elements (a1.policy -> 'Statement') AS w1_policy
+        FROM
+          aws_s3_buckets AS a1
+      ),
+      w2 AS (
+        SELECT
+          *,
+          jsonb_array_elements_text (
+            w1_policy -> 'Principal' -> 'AWS' -> 'Action'
+          ) AS w2_policy_secure_transport
+        FROM
+          w1
+      )
+
+      select
+      *
+      from
+        aws_s3_buckets a
+        left join w2 b on a.arn = b.arn
+        where w2_policy_secure_transport in (
+      's3:deletebucketpolicy',
+      's3:putbucketacl',
+      's3:putbucketpolicy',
+      's3:putencryptionconfiguration',
+      's3:putobjectacl'
+       );
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure that s3 S3 permissions granted to other AWS accounts in bucket policies should be restricted.
+      id: SF010121
+      provider: AWS
+      remediation: remediation/s3/s3_bucket_policy_not_more_permissive.md
+      severity: Medium
+      tags:
+        -Attack Surface
+        -AWS Config
+        - Misconfiguration
+      title: s3 bucket policy not more permissive
+    output: "s3 bucket policy not more permissive, bucket name: {{.name}}, region: {{.region}}"
