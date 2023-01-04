@@ -1,0 +1,34 @@
+rules:
+  - name: s3_account_level_public_access_not_blocks
+    query: |
+      select
+      *
+      from
+      aws_iam_accounts
+      left join
+      aws_s3_accounts on
+      aws_iam_accounts.account_id = aws_s3_accounts.account_id
+      where
+      config_exists is not TRUE
+      or block_public_acls is not TRUE
+      or block_public_policy is not TRUE
+      or ignore_public_acls is not TRUE
+      or restrict_public_buckets is not TRUE;
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure that s3 account level public access blocks.
+      id: SF010124
+      provider: AWS
+      remediation: remediation/s3/s3_account_level_public_access_not_blocks.md
+      severity: Low
+      tags:
+        -AWS Config
+        - Misconfiguration
+      title: s3 account level public access not blocks
+    output: "s3 account level public access not blocks, bucket name: {{.name}}, region: {{.region}}"

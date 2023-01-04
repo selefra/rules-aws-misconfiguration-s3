@@ -15,9 +15,12 @@ modules:
       - rules/s3/bucket_source_ip_not_set.yaml
       - rules/s3/bucket_versioning_is_disabled.yaml
       - rules/s3/mfa_delete_is_disable.yaml
+      - rules/s3/s3_account_level_public_access_not_blocks.yaml
+      - rules/s3/s3_bucket_default_lock_disabled.yaml
       - rules/s3/s3_bucket_policy_grantee_not_check.yaml
       - rules/s3/s3_bucket_policy_not_more_permissive.yaml
       - rules/s3/s3_bucket_replication_disabled.yaml
+      - rules/s3/s3_is_not_protected_by_backup_plan.yaml
       - rules/s3/s3_not_default_encryption_kms.yaml
       - rules/s3/s3_version_lifecycle_policy_not_check.yaml
       - rules/s3/the_target_bucket_for_server_access_logging_is_the_bucket_itself.yaml

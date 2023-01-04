@@ -1,0 +1,29 @@
+rules:
+  - name: s3_is_not_protected_by_backup_plan
+    query: |
+      SELECT
+        *
+      FROM
+        aws_backup_region_settings
+      WHERE
+        resource_type_opt_in_preference ->> 'S3' IS DISTINCT
+      FROM
+        'true';
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.region}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+    metadata:
+      author: Selefra
+      description: Ensure that S3 is protected by a backup plan.
+      id: SF010125
+      provider: AWS
+      remediation: remediation/s3/s3_is_not_protected_by_backup_plan.md
+      severity: Medium
+      tags:
+        - Security
+        - Misconfiguration
+        - AWS Config
+      title: S3 is not protected by backup plan
+    output: "S3 is not protected by backup plan, region: {{.region}}"
