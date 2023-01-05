@@ -1,0 +1,29 @@
+rules:
+  - name: s3_last_backup_recovery_point
+    query: |
+      SELECT
+        DISTINCT (a1.*)
+      FROM
+        aws_s3_buckets a1
+        LEFT JOIN aws_backup_vault_recovery_points a2 ON a1.arn = a2.resource_arn
+      WHERE
+        a2.selefra_id IS NULL
+        OR date_part( 'day', NOW() - a2.completion_date ) > 31;
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.arn}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+    metadata:
+      author: Selefra
+      description: Ensure that recovery points are created for the S3. If the S3 does not have a corresponding recovery point within a month, the rule is a fail.
+      id: SF010126
+      provider: AWS
+      remediation: remediation/s3/s3_last_backup_recovery_point.md
+      severity: Medium
+      tags:
+        - Security
+        - Misconfiguration
+        - AWS Config
+      title: S3 last backup recovery point
+    output: "S3 last backup recovery point, arn: {{.arn}}"
