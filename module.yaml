@@ -21,7 +21,7 @@ modules:
       - rules/s3/s3_bucket_policy_not_more_permissive.yaml
       - rules/s3/s3_bucket_replication_disabled.yaml
       - rules/s3/s3_is_not_protected_by_backup_plan.yaml
-      - rules/s3/s3_last_backup_recovery_point copy.yaml
+      - rules/s3/s3_last_backup_recovery_point.yaml
       - rules/s3/s3_not_default_encryption_kms.yaml
       - rules/s3/s3_version_lifecycle_policy_not_check.yaml
       - rules/s3/the_target_bucket_for_server_access_logging_is_the_bucket_itself.yaml
