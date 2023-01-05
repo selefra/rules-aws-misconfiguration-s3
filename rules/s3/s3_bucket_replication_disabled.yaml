@@ -25,7 +25,7 @@ rules:
       remediation: remediation/s3/s3_bucket_replication_disabled.md
       severity: Medium
       tags:
-        -AWS Config
+        - AWS Config
         - Misconfiguration
       title: s3 bucket replication disabled
     output: "s3 bucket replication disabled, bucket name: {{.name}}, region: {{.region}}"

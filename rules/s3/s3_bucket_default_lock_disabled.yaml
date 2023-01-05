@@ -20,7 +20,7 @@ rules:
       remediation: remediation/s3/s3_bucket_default_lock_disabled.md
       severity: Low
       tags:
-        -AWS Config
+        - AWS Config
         - Misconfiguration
       title: s3 bucket default lock disabled
     output: "s3 bucket default lock disabled, bucket name: {{.name}}, region: {{.region}}"

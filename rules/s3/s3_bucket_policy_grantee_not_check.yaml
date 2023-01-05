@@ -44,7 +44,7 @@ rules:
       remediation: remediation/s3/s3_bucket_policy_grantee_not_check.md
       severity: Medium
       tags:
-        -AWS Config
+        - AWS Config
         - Misconfiguration
       title: s3 bucket policy grantee not check
     output: "s3 bucket policy grantee not check, bucket name: {{.name}}, region: {{.region}}"

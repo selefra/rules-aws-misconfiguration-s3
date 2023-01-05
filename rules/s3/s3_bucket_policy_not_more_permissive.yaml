@@ -45,7 +45,7 @@ rules:
       severity: Medium
       tags:
         -Attack Surface
-        -AWS Config
+        - AWS Config
         - Misconfiguration
       title: s3 bucket policy not more permissive
     output: "s3 bucket policy not more permissive, bucket name: {{.name}}, region: {{.region}}"

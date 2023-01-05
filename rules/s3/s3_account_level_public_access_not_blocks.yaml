@@ -28,7 +28,7 @@ rules:
       remediation: remediation/s3/s3_account_level_public_access_not_blocks.md
       severity: Low
       tags:
-        -AWS Config
+        - AWS Config
         - Misconfiguration
       title: s3 account level public access not blocks
     output: "s3 account level public access not blocks, bucket name: {{.name}}, region: {{.region}}"
