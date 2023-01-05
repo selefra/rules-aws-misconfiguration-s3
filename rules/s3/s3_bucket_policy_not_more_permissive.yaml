@@ -44,7 +44,7 @@ rules:
       remediation: remediation/s3/s3_bucket_policy_not_more_permissive.md
       severity: Medium
       tags:
-        -Attack Surface
+        - Attack Surface
         - AWS Config
         - Misconfiguration
       title: s3 bucket policy not more permissive
