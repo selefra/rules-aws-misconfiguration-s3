@@ -2,7 +2,7 @@ rules:
   - name: bucket_object_traversal_by_policy
     query: |
       SELECT
-        *
+        DISTINCT(a1.*)
       FROM
         aws_s3_buckets a1,
         json_array_elements(a1.policy :: json -> 'Statement') a2
@@ -13,7 +13,10 @@ rules:
           OR a2 ->> 'Action' = 's3:*'
         )
         AND a2 ->> 'Effect' = 'Allow'
-        AND a2 ->> 'Principal' = '*';
+        AND (
+          a2 ->> 'Principal' = '*'
+          OR a2 -> 'Principal' ->> 'AWS' = '*'
+        );
     labels:
       resource_account_id: '{{.account_id}}'
       resource_id: '{{.name}}'

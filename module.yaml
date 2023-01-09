@@ -16,6 +16,7 @@ modules:
       - rules/s3/bucket_versioning_is_disabled.yaml
       - rules/s3/mfa_delete_is_disable.yaml
       - rules/s3/s3_account_level_public_access_not_blocks.yaml
+      - rules/s3/s3_bucket_blacklisted_actions_prohibited.yaml
       - rules/s3/s3_bucket_default_lock_disabled.yaml
       - rules/s3/s3_bucket_policy_grantee_not_check.yaml
       - rules/s3/s3_bucket_policy_not_more_permissive.yaml

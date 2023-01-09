@@ -1,0 +1,36 @@
+rules:
+  - name: s3_bucket_blacklisted_actions_prohibited
+    query: |
+      SELECT
+        DISTINCT(a1.*)
+      FROM
+        aws_s3_buckets a1,
+        json_array_elements (a1.policy :: json -> 'Statement') a2
+      WHERE
+        a2 ->> 'Action' IN (
+          's3:*', 's3:GetBucket*', 's3:DeleteObject'
+        )
+        AND a2 ->> 'Effect' = 'Allow'
+        AND (
+          a2 ->> 'Principal' = '*'
+          OR a2 -> 'Principal' ->> 'AWS' = '*'
+        );
+    labels:
+      resource_account_id: '{{.account_id}}'
+      resource_id: '{{.name}}'
+      resource_region: '{{.region}}'
+      resource_type: S3
+      bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
+    metadata:
+      author: Selefra
+      description: Ensure that Amazon Simple Storage Service (Amazon S3) bucket policy does not allow blocklisted bucket-level and object-level actions on resources in the bucket for principals from other AWS accounts. For example, the rule checks that the Amazon S3 bucket policy does not allow another AWS account to perform any s3:GetBucket* actions and s3:DeleteObject on any object in the bucket. The rule is NON_COMPLIANT if any blocklisted actions are allowed by the Amazon S3 bucket policy.
+      id: SF010127
+      provider: AWS
+      remediation: remediation/s3/s3_bucket_blacklisted_actions_prohibited.md
+      severity: High
+      tags:
+        - Security
+        - Misconfiguration
+        - AWS Config
+      title: S3 bucket blacklisted actions prohibited
+    output: "S3 bucket blacklisted actions prohibited, bucket name: {{.name}}, region: {{.region}}"
