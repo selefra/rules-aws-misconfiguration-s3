@@ -16,8 +16,8 @@ rules:
       or restrict_public_buckets is not TRUE;
     labels:
       resource_account_id: '{{.account_id}}'
-      resource_id: '{{.name}}'
-      resource_region: '{{.region}}'
+      resource_id: '{{.user}}'
+      resource_region: 'All region'
       resource_type: S3
       bucket_url: 'https://{{.name}}.s3.{{.region}}.amazonaws.com'
     metadata:
@@ -31,4 +31,4 @@ rules:
         - AWS Config
         - Misconfiguration
       title: s3 account level public access not blocks
-    output: "s3 account level public access not blocks, bucket name: {{.name}}, region: {{.region}}"
+    output: "s3 account level public access not blocks, user name {{.user}}}"

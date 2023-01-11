@@ -1,10 +1,12 @@
 rules:
   - name: s3_version_lifecycle_policy_not_check
     query: |
-      select distinct
-      v.account_id
-      from
-      aws_s3_buckets as v left join aws_s3_bucket_lifecycles as f on v.account_id = f.account_id where f.account_id is null;
+        select distinct
+        v.account_id,
+        v.name,
+        v.region
+        from
+        aws_s3_buckets as v left join aws_s3_bucket_lifecycles as f on v.account_id = f.account_id where f.account_id is null;
     labels:
       resource_account_id: '{{.account_id}}'
       resource_id: '{{.name}}'
