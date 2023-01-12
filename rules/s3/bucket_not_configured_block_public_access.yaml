@@ -4,13 +4,16 @@ rules:
       SELECT
         *
       FROM
-        aws_s3_accounts
+        aws_s3_buckets
       WHERE
-        restrict_public_buckets = FALSE;
+        block_public_acls IS NOT TRUE
+        OR block_public_policy IS NOT TRUE
+        OR ignore_public_acls IS NOT TRUE
+        OR restrict_public_buckets IS NOT TRUE;
     labels:
       resource_account_id: '{{.account_id}}'
-      resource_id: '{{.account_id}}'
-      resource_region: 'All Regions'
+      resource_id: '{{.arn}}'
+      resource_region: '{{.region}}'
       resource_type: S3
     metadata:
       author: Selefra
@@ -31,4 +34,4 @@ rules:
         - SOC 2
         - AWS Config
       title: S3 Bucket not configured Block public access
-    output: "S3 Bucket not configured Block public access, account id: {{.account_id}}"
+    output: "S3 Bucket not configured Block public access, bucket arn: {{.arn}}"

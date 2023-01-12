@@ -1,19 +1,15 @@
 rules:
   - name: s3_account_level_public_access_not_blocks
     query: |
-      select
-      *
-      from
-      aws_iam_accounts
-      left join
-      aws_s3_accounts on
-      aws_iam_accounts.account_id = aws_s3_accounts.account_id
-      where
-      config_exists is not TRUE
-      or block_public_acls is not TRUE
-      or block_public_policy is not TRUE
-      or ignore_public_acls is not TRUE
-      or restrict_public_buckets is not TRUE;
+      SELECT
+        *
+      FROM
+        aws_s3_accounts
+      WHERE
+        block_public_acls IS NOT TRUE
+        OR block_public_policy IS NOT TRUE
+        OR ignore_public_acls IS NOT TRUE
+        OR restrict_public_buckets IS NOT TRUE;
     labels:
       resource_account_id: '{{.account_id}}'
       resource_id: '{{.user}}'
